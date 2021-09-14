@@ -1,6 +1,5 @@
 # Note: this project forked from [xCuzSkillz](https://github.com/xCuzSkillz) i just created server side
 
-# MusicBot-Premium-Website
 
 ## Installation
 
