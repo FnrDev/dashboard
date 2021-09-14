@@ -11,7 +11,7 @@ npm install
 
 ### You need to create .env file
 
--.env
+- .env
 ```sh
 clientID=BOT_ID
 token=BOT_TOKEN
