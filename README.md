@@ -1,3 +1,5 @@
+# Note: this project forked from [xCuzSkillz](https://github.com/xCuzSkillz) i just created server side
+
 # MusicBot-Premium-Website
 Discord Music bot premium website
 <img src="https://cdn.discordapp.com/attachments/652931196774252574/844536029058826240/unknown.png">
