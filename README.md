@@ -8,15 +8,17 @@ npm install
 ```
 ---
 
-### You need to create .env file
+### You need to rename .env file
 
 - .env
 ```sh
-clientID=BOT_ID
-token=BOT_TOKEN
+clientID=
+token=
 callback=http://localhost:3000/login
-secret=BOT_SECRET
+secret=
 port=3000
+SCOPES=identify,guilds
+SUPPORT=pornhub
 ```
 ---
 
