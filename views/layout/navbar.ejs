@@ -1,0 +1,43 @@
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-dark mt-4">
+        <div class="container-fluid">
+        <a href="/">
+          <img class="rounded-circle" src="<%= client.user.displayAvatarURL({ dynamic: true }) %> " width="50px" height="50px">
+        </a>
+         &nbsp;&nbsp;&nbsp;
+          <a class="navbar-brand text-light" href="/"><%= client.user.username %></a>
+          <span class="border-end br-cs"></span>
+          <button class="navbar-toggler text-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon text-light"></span>
+          </button>
+          <div class="collapse navbar-collapse nav-c" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active text-light" aria-current="page" href="/">Home</a>
+              </li>
+              &nbsp;
+              <li class="nav-item">
+                <a class="nav-link text-light" href="/premium">Premium</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-light" href="/support" target="_blank">Support</a>
+              </li>
+            </ul>
+          </div>
+          <% if (login) { %>
+            <div class="dropdown">
+              <button class="btn  dropdown-toggle text-light" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+               <img width="35px" height="35px" class="rounded-circle" src="<%= user.displayAvatarURL({ dynamic: true }) %> ">&nbsp; <%= user.username %> 
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item text-light" href="/logout">Logout</a></li>
+              </ul>
+            </div>
+            <% } else { %>
+              <a href="/login">
+                <button class="btn-custom1">Login</button>
+              </a>
+            <% } %> 
+        </div>
+      </nav>
+   </div>

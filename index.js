@@ -8,20 +8,16 @@ const passport = require('passport');
 const DiscordStrategy = require('passport-discord').Strategy;
 const session = require('express-session');
 const fileStore = require('session-file-store')(session);
-const checkAuth = require('./middleware/checkAuth');
 app.use(express.json());
 app.use(express.static('public'))
 require('dotenv').config();
 require('colors');
 
-const inviteRoutes = require('./router/invite')
-app.use('/invite', inviteRoutes)
-
 passport.use(new DiscordStrategy({
     clientID: process.env.clientID,
     clientSecret: process.env.secret,
     callbackURL: process.env.callback,
-    scope: ["identify", "guilds"]
+    scope: process.env.SCOPES.split(',')
 }, function(accessToken, refreshToken, profile, done) {
     process.nextTick(function() {
         return done(null, profile)
@@ -29,53 +25,48 @@ passport.use(new DiscordStrategy({
 }))
 
 app.use(session({
-    secret: 'fnr12345624',
-    resave: false,
-    saveUninitialized: false,
-    store: new fileStore(),
-    cookie: { maxAge: 3600000 * 24 * 30 }
-  }));
-
-  app.use(passport.initialize());
-  app.use(passport.session());
-  
-  passport.serializeUser(function(user, done) {
-    done(null, user);
-  });
-  passport.deserializeUser(function(obj, done) {
-    done(null, obj);
-  });
-
-client.on('ready', () => {
-    console.log(`[Discord API] Logged in as ${client.user.username}`.cyan);
-})
-
-app.get('/', async (req, res) => {
-    const user = req.isAuthenticated() ? req.user : null;
-    res.render('index', {
-      client: client,
-      user: user
-    })
-})
-
-app.get('/premium', checkAuth, async(req, res) => {
-  res.render('premium', {
-    client: client
-  })
-})
-
-app.get('/login', passport.authenticate('discord', {
-  failureRedirect: '/'
-}), function(req, res) {
-  res.redirect(`/`)
+  secret: 'fnr12345624',
+  resave: false,
+  saveUninitialized: false,
+  store: new fileStore({ 
+    logFn: () => true
+    }),
+  cookie: { maxAge: 3600000 * 24 * 30 }
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+passport.deserializeUser(function(obj, done) {
+  done(null, obj);
 });
 
-app.get('/logout', async (req, res) => {
-    req.session.destroy(() => {
-      req.logout();
-      res.redirect('/')
-    })
+app.use(async function(req, res, next) {
+  let user;
+  if (req.isAuthenticated()) {
+    user = await client.users.fetch(req.user.id)
+  }
+  req.bot = client;
+  res.locals.login = req.isAuthenticated();
+  res.locals.client = client;
+  res.locals.user = user
+  res.locals.loggedUser = req.user;
+  res.locals.route = req.originalUrl
+  next();
+})
+app.use('/', require('./router/index'))
+app.use('/invite', require('./router/invite'))
+app.use('/premium', require('./router/premium'))
+app.use('/login', require('./router/login'))
+app.use('/logout', require('./router/logout'))
+app.use('/support', require('./router/support'))
+
+
+app.listen(process.env.port, () => console.log(`App is ready in port ${process.env.port}`))
+
+client.on('ready', () => {
+  console.log(`[Discord API] Logged in as ${client.user.username}`.cyan);
 })
 
 client.login(process.env.token);
-app.listen(process.env.port, () => console.log(`App is ready in port ${process.env.port}`))

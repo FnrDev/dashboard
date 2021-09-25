@@ -1,54 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/premium.css">
-    <meta property="og:url" content="<%= client.user.displayAvatarURL() %>">
-    <meta property="og:image" content="<%= client.user.displayAvatarURL() %> "/>
-    <link rel="shortcut icon" href="<%= client.user.displayAvatarURL() %> " />
-    <title><%= client.user.username %> </title>
-</head>
+  <% include ./layout/head %>
 <body>
-   <div class="container">
-    <nav class="navbar navbar-expand-lg navbar-dark mt-4">
-        <div class="container-fluid">
-        <img class="rounded-circle" src="<%= client.user.displayAvatarURL() %> " width="50px" height="50px">
-         &nbsp;&nbsp;&nbsp;
-          <a class="navbar-brand text-light" href="#"><%= client.user.username %> </a>
-          <span class="border-end br-cs"></span>
-          <button class="navbar-toggler text-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon text-light"></span>
-          </button>
-          <div class="collapse navbar-collapse nav-c" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link active text-light" aria-current="page" href="/">Home</a>
-              </li>
-              &nbsp;
-              <li class="nav-item">
-                <a class="nav-link text-light" href="#">Premium</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-light" href="#">Support</a>
-              </li>
-            </ul>
-          </div>
-          <button class="btn-custom1" onclick="login()">Login</button>
-          <div class="dropdown" hidden>
-            <button class="btn  dropdown-toggle text-light" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-             <img width="35px" height="35px" class="rounded-circle" src="https://cdn.discordapp.com/avatars/323930938125844480/a_e88b2ca066a6fedc1a3285dee350649a.gif?size=1024">&nbsp; xCuzSkillz
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li><a class="dropdown-item text-light" href="#">Logout</a></li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+    <% include ./layout/navbar %>
       <div class="container">
         <div class="row premium-section mt-5">
           <div class="col col-prem own-col">
@@ -85,7 +39,6 @@
                </div>
           </div>
         </div>
-      </div>
       <div class="card mt-5 border-0">
         <div class="card-head">
           <h4>
@@ -189,16 +142,8 @@
      </div>
    </div>
 
-<svg  class="wave-footer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#161625" fill-opacity="1" d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
-<footer class="mt-5">
-    <p class="text-center">© 2021 - All rights reversed to BotName</p>
-</footer>
+   <% include ./layout/footer %>
+  </div>
 </body>
-<script  src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha484-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
-<script src="../scripts/script.js"></script>
-<script>
-  function login() {
-    location.href = '/login'
-  }
-</script>
+<% include ./layout/script %>
 </html>
