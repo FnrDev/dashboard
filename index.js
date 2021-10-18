@@ -2,7 +2,7 @@
 const express = require('express');
 const app = express();
 const Discord = require('discord.js');
-const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MEMBERS"] })
+const client = new Discord.Client({ intents: ["GUILDS"] })
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
 const passport = require('passport');

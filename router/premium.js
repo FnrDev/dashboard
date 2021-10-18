@@ -3,7 +3,7 @@ const router = express.Router();
 const checkAuth = require('../middleware/checkAuth')
 
 router.get('/', checkAuth, async(req, res) => {
-    res.render('premium')
+    res.render('pages/premium')
 })
 
 module.exports = router;

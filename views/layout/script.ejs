@@ -1,2 +1,12 @@
 <script  src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
-<script src="/scripts/script.js"></script>
+<script>
+    const btnCredits = document.getElementById("creditsbtn")
+    const btnCreditsClose = document.getElementById("overlay-close")
+
+    btnCredits.addEventListener("click", () =>{
+        document.getElementById("overlay").style.display = "block";
+    })
+    btnCreditsClose.addEventListener("click", () =>{
+        document.getElementById("overlay").style.display = "none";
+    })
+</script>
